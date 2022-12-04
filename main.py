@@ -20,7 +20,7 @@ def print_hi(name):
         print(twitter_model.most_similar(word))
         print(wiki_model.most_similar(word))
         cosine_similarity_wiki_twitter = numpy.dot(twitter_model[word], wiki_model[word]) / (
-                    numpy.linalg.norm(twitter_model[word]) * numpy.linalg.wiki_model(model[word]))
+                    numpy.linalg.norm(twitter_model[word]) * numpy.linalg.norm(wiki_model[word]))
         print(cosine_similarity_wiki_twitter)
 
         print('\n\n')
