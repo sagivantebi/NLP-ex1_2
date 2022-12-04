@@ -14,13 +14,14 @@ def print_hi(name):
     wiki_model = dl.load('glove-wiki-gigaword-200')
 
     ## 15 similar word in twitter and wiki
-    similar_words = ["open", "computer", "dog", "cat", "oven","perfume","coffee","banana","guitar","antibiotics"]
+    similar_words = ["open", "computer", "dog", "cat", "oven", "perfume", "coffee", "banana", "guitar", "antibiotics"]
     for word in similar_words:
         print(word)
-        print(twitter_model.most_similar(word))
-        print(wiki_model.most_similar(word))
-        cosine_similarity_wiki_twitter = numpy.dot(twitter_model[word], wiki_model[word]) / (
-                    numpy.linalg.norm(twitter_model[word]) * numpy.linalg.norm(wiki_model[word]))
+        tw_most, wik_most = twitter_model.most_similar(word), wiki_model.most_similar(word)
+        print(tw_most)
+        print(wik_most)
+        cosine_similarity_wiki_twitter = numpy.dot(tw_most, wik_most) / (
+                numpy.linalg.norm(tw_most) * numpy.linalg.norm(wik_most))
         print(cosine_similarity_wiki_twitter)
 
         print('\n\n')
