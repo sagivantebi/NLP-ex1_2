@@ -4,8 +4,14 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import gensim.downloader as dl
-import numpy
+import numpy as np
 
+def count_same_occurence(tw_top,wiki_top):
+    count = 0
+    for word in tw_top:
+        if word[0] in wiki_top:
+            count += 1
+    return count
 
 def print_hi(name):
     model = dl.load("word2vec-google-news-300")
@@ -15,16 +21,24 @@ def print_hi(name):
 
     ## 15 similar word in twitter and wiki
     similar_words = ["open", "computer", "dog", "cat", "oven", "perfume", "coffee", "banana", "guitar", "antibiotics"]
+    diff_words = ["trump", "musk","israel","soccer","liverpool","west","sky","apple","election","binary"]
     for word in similar_words:
         print(word)
         tw_most, wik_most = twitter_model.most_similar(word), wiki_model.most_similar(word)
         print(tw_most)
         print(wik_most)
-        cosine_similarity_wiki_twitter = numpy.dot(tw_most, wik_most) / (
-                numpy.linalg.norm(tw_most) * numpy.linalg.norm(wik_most))
-        print(cosine_similarity_wiki_twitter)
-
+        print(count_same_occurence(tw_most,wik_most))
         print('\n\n')
+
+    print("-------------------------different-------------------------------")
+    for word in diff_words:
+        print(word)
+        tw_most, wik_most = twitter_model.most_similar(word), wiki_model.most_similar(word)
+        print(tw_most)
+        print(wik_most)
+        print(count_same_occurence(tw_most,wik_most))
+        print('\n\n')
+
 
     # #workikng
     # cosine_similarity_w1_w2 = numpy.dot(model['small'], model['humongous']) / (
